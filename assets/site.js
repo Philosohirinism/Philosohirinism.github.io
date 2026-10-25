@@ -1,6 +1,7 @@
 const menu = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#site-nav');
 const ja = document.documentElement.lang === 'ja';
+const zh = document.documentElement.lang.startsWith('zh');
 // Keep the current theme filter when changing language.
 document.querySelectorAll('.language-switch a').forEach(link => {
   const target = new URL(link.href);
@@ -39,7 +40,7 @@ if (filterLinks.length) {
   entries.forEach(item => { item.hidden = chosen !== 'all' && item.dataset.category !== chosen; });
   const count = entries.filter(item => !item.hidden).length;
   const status = document.querySelector('.filter-result');
-  if (status && chosen !== 'all') status.textContent = ja ? `${count}件のテーマを表示しています。「すべて」で一覧に戻れます。` : `${count} theme${count === 1 ? '' : 's'} shown. Choose All to see every theme.`;
+  if (status && chosen !== 'all') status.textContent = zh ? `正在显示${count}个主题，选择“全部”可返回完整列表。` : ja ? `${count}件のテーマを表示しています。「すべて」で一覧に戻れます。` : `${count} theme${count === 1 ? '' : 's'} shown. Choose All to see every theme.`;
 }
 
 document.querySelector('[data-copy-link]')?.addEventListener('click', async () => {
@@ -47,8 +48,8 @@ document.querySelector('[data-copy-link]')?.addEventListener('click', async () =
   try {
     await navigator.clipboard.writeText(location.href);
     const local = location.protocol === 'file:' || ['localhost','127.0.0.1'].includes(location.hostname);
-    status.textContent = local ? (ja ? 'リンクをコピーしました。このリンクはこのコンピューターで開けます。' : 'Page link copied. This link works on this computer.') : (ja ? 'ページのリンクをコピーしました。' : 'Page link copied.');
+    status.textContent = zh ? (local?'链接已复制，此链接可在本机打开。':'本页链接已复制。') : local ? (ja ? 'リンクをコピーしました。このリンクはこのコンピューターで開けます。' : 'Page link copied. This link works on this computer.') : (ja ? 'ページのリンクをコピーしました。' : 'Page link copied.');
   } catch {
-    status.textContent = ja ? `ブラウザーのアドレスをコピーしてください：${location.href}` : `Copy the address from your browser: ${location.href}`;
+    status.textContent = zh ? `请复制浏览器地址：${location.href}` : ja ? `ブラウザーのアドレスをコピーしてください：${location.href}` : `Copy the address from your browser: ${location.href}`;
   }
 });

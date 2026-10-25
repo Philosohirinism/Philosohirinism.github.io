@@ -2,6 +2,6 @@
 
 Personal website: https://philosohirinism.github.io/
 
-English and Japanese pages for research, professional experience, Academic Bar, and UjiBricks.
+English, Japanese, and Chinese pages for research, professional experience, Academic Bar, and UjiBricks.
 
 This repository contains the generated public website and selected display assets only.
